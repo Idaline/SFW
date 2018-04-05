@@ -1,0 +1,381 @@
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+load('data/taxoAll.RData')
+row.names(taxT)=taxT$Num
+head(taxT)
+subset(taxT,Num=='1002 C')
+subset(taxT,Num=='1034 DIG')
+consR$Num
+consD$Num
+ressD$Num
+head(ressD)
+ressD$X
+ressB$Num
+consB$Num
+taxT=unique(taxT)
+row.names(taxT)=taxT$Num
+load('data/taxoAll.RData')
+taxT=unique(taxT)
+save(taxT,file='data/taxoAll.RData')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+load('data/taxoAll.RData')#
+		row.names(taxT)=taxT$Num#
+		taxT=taxT[,-(1:2)]#
+		OldTax=taxT
+NewTax=data.frame(Genus=NewTaxo$Genus,Family=NewTaxo$Family,Order=NewTaxo$Order,Class=NewTaxo$Class,Phylum=NewTaxo$Phylum,Kingdom=NewTaxo$Kingdom)#
+	row.names(NewTax)=NewTaxo$Num
+TT3=rbind(OldTax,NewTax)#
+	TT3$Order=as.character(TT3$Order)#
+	TT3$Order[which(TT3$Order=="Mesostigmata")]="Parasitiformes"#
+	TT3$Family=as.factor(TT3$Family)#
+	TT3$Order=as.factor(TT3$Order)#
+	TT3$Class=as.factor(TT3$Class)#
+	TT3=droplevels(TT3)#
+	tax=as.taxo(TT3)
+subset(TT3,Genus=='Diplopoda')
+subset(OldTax,Genus=='Diplopoda')
+subset(taxT,Genus=='Diplopoda')
+subset(taxT,is.na(Family))
+taxT[which(is.na(taxT$Family))]=taxT$Genus[which(is.na(taxT$Family))]
+taxT$Family[which(is.na(taxT$Family))]=taxT$Genus[which(is.na(taxT$Family))]
+subset(taxT,is.na(Family))
+taxT$Order[which(is.na(taxT$Order))]=taxT$Genus[which(is.na(taxT$Order))]
+summary9taxT
+summary(taxT)
+load('data/taxoAll.RData')
+taxT$Order[which(is.na(taxT$Family))]=taxT$Genus[which(is.na(taxT$Family))]
+taxT$Family[which(is.na(taxT$Family))]=taxT$Genus[which(is.na(taxT$Family))]
+save(taxT,file='data/taxoAll.RData')
+unique(taxT$Order)
+subset(taxT,Order=='552')
+summary(taxT)
+taxT$Order[which(taxT$Order=='552')]='Insecta'
+taxT$Family[which(taxT$Family=='552')]='Insecta'
+subset(taxT,Order=='611' | Order=='640' | Order=='442' | Order=='77' | Order=='668' | Order=='476' | Order=='746' )
+a=subset(taxT,Order=='611' | Order=='640' | Order=='442' | Order=='77' | Order=='668' | Order=='476' | Order=='746' )
+taxT=subset(taxT,Order!='611' & Order!='640' & Order!='442' & Order!='77' & Order!='668' & Order!='476' & Order!='746' )
+a
+summary(a)
+a$Genus=as.character(a$Genus)
+a$Family=a$Genus
+a$Order=a$Genus
+a
+taxT=rbind(taxT,a)
+tail9taxT
+unique(taxT$Family)
+unique(taxT$Order)
+unique(taxT$Class)
+unique(taxT$Phylum)
+subset(taxT$Family=='504')
+subset(taxT,Family=='504')
+summary(taxT)
+taxT$Family[which(taxT$Family=='504')]='Diplura'
+taxT$Order[which(taxT$Family=='504')]='Diplura'
+save(taxT,file='data/taxoAll.RData')
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+subset(taxT,Ganus==' Nargus')
+subset(taxT,Genus=='Nargus')
+NewTaxo
+NewTaxo=subset(NewTaxo,Genus!='Nargus')
+nrow(NewTaxo)
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+subset(taxT,GEnus== Sminthurides)
+subset(taxT,Genus== Sminthurides)
+subset(taxT,Genus=='Sminthurides')
+NewTaxo=subset(NewTaxo,Genus!='Sminthurides')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+NewTaxo=subset(NewTaxo,Family!='Tullbergiidae')
+NewTaxo=subset(NewTaxo,Family!='Scutigerellidae')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+subset(taxT,Family=='Tullbergiidae')
+subset(taxT,Order=='Collembola')
+nrow(NewTaxo)
+taxT$Order[which(taxT$Order=='Collembola')]='Poduromorpha'
+save(taxT,file='data/taxoAll.RData')
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+subset(taxT,Phylum=='Magnoliophyta')
+head(IncT)
+subset(IncT,Genus=='Leitneria')
+subset(taxT,Genus=='Leitneria')
+taxT[which(taxT$Genus=='Leitneria'),4:7]=c('Halolaelapidae','Parasitiformes','Arachnida','Arthropoda')
+summary(taxT)
+taxT$Class=as.character(taxT$Class)
+taxT[which(taxT$Genus=='Leitneria'),4:7]=c('Halolaelapidae','Parasitiformes','Arachnida','Arthropoda')
+subset(taxT,Genus=='Leitneria')
+which(taxT$Genus=='Leitneria')
+taxT[807,4:7]=c('Halolaelapidae','Parasitiformes','Arachnida','Arthropoda')
+taxT[808,4:7]=c('Halolaelapidae','Parasitiformes','Arachnida','Arthropoda')
+summary(taxT)
+save(taxT,file='data/taxoAll.RData')
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+subset(taxT,Phylum=='Euglenozoa')
+Bib$Kingdom[which(Bib$Phylum=='Euglenozoa')]='Protozoa'
+taxT$Kingdom[which(taxT$Phylum=='Euglenozoa')]='Protozoa'
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+subset(NewTaxo,Kingdom=='Bacteria')
+subset(taxT,Phylum=='Euglenozoa')
+subset(NewTaxo,Phylum=='Euglenozoa')
+save(taxT,file='data/taxoAll.RData')
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+source('MakePhylo.R')
+source('MakePhylo.R')
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+head(g)
+tail(g)
+head(NewTaxo)
+row.names(g)
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+head(g)
+nrow(g)
+tail(g)
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+head(g)
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+source('MakePhylo.R')
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+head(g)
+load('data/taxoAll.RData')#
+		row.names(taxT)=taxT$Num#
+		taxT=taxT[,-(1:2)]#
+		OldTax=taxT
+TT3=rbind(OldTax,NewTax)#
+	TT3$Order=as.character(TT3$Order)#
+	TT3$Order[which(TT3$Order=="Mesostigmata")]="Parasitiformes"#
+	TT3$Family=as.factor(TT3$Family)#
+	TT3$Order=as.factor(TT3$Order)#
+	TT3$Class=as.factor(TT3$Class)#
+	TT3=droplevels(TT3)#
+	tax=as.taxo(TT3)#
+	t=dist.taxo(tax)
+NewTax=data.frame(Genus=NewTaxo$Genus,Family=NewTaxo$Family,Order=NewTaxo$Order,Class=NewTaxo$Class,Phylum=NewTaxo$Phylum,Kingdom=NewTaxo$Kingdom)#
+	row.names(NewTax)=NewTaxo$Num
+TT3=rbind(OldTax,NewTax)#
+	TT3$Order=as.character(TT3$Order)#
+	TT3$Order[which(TT3$Order=="Mesostigmata")]="Parasitiformes"#
+	TT3$Family=as.factor(TT3$Family)#
+	TT3$Order=as.factor(TT3$Order)#
+	TT3$Class=as.factor(TT3$Class)
+TT3=droplevels(TT3)#
+	tax=as.taxo(TT3)#
+	t=dist.taxo(tax)
+Pcoa2=dudi.pco(t,scannf=FALSE,nf=2)#
+	axes=data.frame(Pcoa2$l1)
+head(axes)
+axesN=merge(axes,NewTax,by='row.names')
+head(axesN)
+tail(axesN)
+axesN$Row.Names
+axesN$Row.names
+summary(axesN)
+summary(NewTax)
+class(row.names(NewTax))
+NewTax$Num=row.names(NewTax)
+head(NewTax)
+NewTax=data.frame(Genus=NewTaxo$Genus,Family=NewTaxo$Family,Order=NewTaxo$Order,Class=NewTaxo$Class,Phylum=NewTaxo$Phylum,Kingdom=NewTaxo$Kingdom)#
+	row.names(NewTax)=NewTaxo$Num
+head(NewTax)
+head(NewTaxo)
+colnames(NewTaxo)[1]='Num'
+NewTax=data.frame(Genus=NewTaxo$Genus,Family=NewTaxo$Family,Order=NewTaxo$Order,Class=NewTaxo$Class,Phylum=NewTaxo$Phylum,Kingdom=NewTaxo$Kingdom)#
+	row.names(NewTax)=NewTaxo$Num
+head(NewTax)
+TT3=rbind(OldTax,NewTax)
+TT3$Order=as.character(TT3$Order)#
+	TT3$Order[which(TT3$Order=="Mesostigmata")]="Parasitiformes"#
+	TT3$Family=as.factor(TT3$Family)#
+	TT3$Order=as.factor(TT3$Order)#
+	TT3$Class=as.factor(TT3$Class)#
+	TT3=droplevels(TT3)#
+	tax=as.taxo(TT3)#
+	t=dist.taxo(tax)#
+	Pcoa2=dudi.pco(t,scannf=FALSE,nf=2)#
+	axes=data.frame(Pcoa2$l1)
+head(axes)
+axes=[which(!is.na(match(row.names(axes),row.names(NewTax)))),]
+axes=axes[which(!is.na(match(row.names(axes),row.names(NewTax)))),]
+axes=axes[which(!is.na(match(row.names(axes),row.names(NewTax)))),]
+head(axes)
+axes
+source('MakePhylo.R')
+g=makePhylo(NewTaxo,MakePhyloO=FALSE)
+head(g)
+head(NewTaxo)
+ls()
+head(newData)
+g=predictInter(newData,g)
+colnames(newData)[1]='Num'
+e=predictInter(newData,g)
+descSp=newData
+axes=g
+TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")
+TrTx$Web[which(is.na(TrTx$Web))]=0
+newData=merge(newData,consD,by.x='Num',by.y='X')
+head(newData)
+head(consD)
+newData=merge(newData,consD,by='Num')
+head(newData)
+consD=read.table("~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/conso.csv",head=TRUE,sep=";")
+consD=consD[,c(1:4,6,7,5,8,9,10,11,16,17)]
+head(consD)
+consD=consD[,-(c(2,9:13))]
+head(consD)
+newData=merge(newData,consD,by.x='Num',by.y='X')
+head(newData)
+newData=consB[1:100,]
+head(newData)
+newData=ressD[1:100,]
+head(newData)
+newData=merge(newData,consD,by.x='X',by.y='X')
+head(newData)
+newData=newData[,-(14:15)]
+colnames(newData)[1]='Num'
+descSp=newData
+TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")
+TrTx$Web[which(is.na(TrTx$Web))]=0
+TrTx$LogBM=log(TrTx$Bodymass+1)
+colnames(newData)[1]='Bodymass'
+TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")#
+TrTx$Web[which(is.na(TrTx$Web))]=0#
+#
+TrTx$LogBM=log(TrTx$Bodymass+1)
+head(TrTx)
+descSp=newData
+TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")#
+TrTx$Web[which(is.na(TrTx$Web))]=0#
+#
+TrTx$LogBM=log(TrTx$Bodymass+1)
+head(descSp)
+descSp[1]=Num
+descSp[1]='Num'
+descSp[2]='Bodymass'
+TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")#
+TrTx$Web[which(is.na(TrTx$Web))]=0#
+#
+TrTx$LogBM=log(TrTx$Bodymass+1)
+head(descSp)
+descSp=newData
+head(newData)
+colnames(descSp)[,1:2]=c('Num','Bodymass')
+colnames(descSp)[1:2]=c('Num','Bodymass')
+head(descSp)
+TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")
+TrTx$Web[which(is.na(TrTx$Web))]=0
+TrTx$LogBM=log(TrTx$Bodymass+1)
+TrTx$LogBM[is.na(TrTx$LogBM)]=0
+TrTx$Web=as.factor(TrTx$Web)#
+TrTx$Poison=as.factor(TrTx$Poison)#
+TrTx$Herbivore =as.factor(TrTx$Herbivore)#
+TrTx$Carnivore=as.factor(TrTx$Carnivore)#
+TrTx$Fungivore=as.factor(TrTx$Fungivore)#
+TrTx$Detritivore=as.factor(TrTx$Detritivore)#
+TrTx$Aboveground=as.factor(TrTx$Aboveground)#
+TrTx$Belowground=as.factor(TrTx$Belowground)#
+TrTx$Toughness=as.factor(TrTx$Toughness)#
+TrTx$Mobility=as.factor(TrTx$Mobility)
+head(descSp)
+colnames(descSp)[3:6]=c('Toughness','Mobility','Aboveground','Belowground')
+colnames(descSp)[16:19]=c('Carnivore','Fungivore','Herbivore','Detritivore')
+TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")#
+TrTx$Web[which(is.na(TrTx$Web))]=0#
+#
+TrTx$LogBM=log(TrTx$Bodymass+1)#
+TrTx$LogBM[is.na(TrTx$LogBM)]=0#
+#
+TrTx$Web=as.factor(TrTx$Web)#
+TrTx$Poison=as.factor(TrTx$Poison)#
+TrTx$Herbivore =as.factor(TrTx$Herbivore)#
+TrTx$Carnivore=as.factor(TrTx$Carnivore)#
+TrTx$Fungivore=as.factor(TrTx$Fungivore)#
+TrTx$Detritivore=as.factor(TrTx$Detritivore)#
+TrTx$Aboveground=as.factor(TrTx$Aboveground)#
+TrTx$Belowground=as.factor(TrTx$Belowground)#
+TrTx$Toughness=as.factor(TrTx$Toughness)#
+TrTx$Mobility=as.factor(TrTx$Mobility)
+TrR=data.frame(Resource=TrTx$Num,Bodymass.x=TrTx$LogBM,Toughness=TrTx$Toughness, Mobility=TrTx$Mobility,Aboveground.x=TrTx$Aboveground,Belowground.x=TrTx$Belowground,Kingdom=TrTx$Kingdom,RS1.x=TrTx$RS1,RS2.x=TrTx$RS2)#
+#
+TrC=data.frame(Consumer=TrTx$Num,Bodymass.y=TrTx$LogBM,Web=TrTx$Web,Poison=TrTx$Poison,Carnivore=TrTx$Carnivore,Fungivore=TrTx$Fungivore,Herbivore=TrTx$Herbivore,Detritivore=TrTx$Detritivore,Aboveground.y=TrTx$Aboveground,Belowground.y=TrTx$Belowground,RS1.y=TrTx$RS1,RS2.y=TrTx$RS2)
+TrR=unique(TrR)#
+TrC=unique(TrC)#
+d=rbind(TrR,TrR)#
+for (i in 2:nrow(TrC))#
+{#
+	d=rbind(d,TrR)#
+}#
+d=arrange(d,Resource)#
+TrRC=data.frame(d,TrC)#
+TrRC=unique(TrRC)#
+#
+########### Données#
+#
+load('data/data.RData')#
+#
+consD=data$consD#
+ressD=data$ressD#
+consD=consD[,c(1:10)]#
+ressD=ressD[,c(1:6,8)]
+consB=data$consB#
+ressB=data$ressB#
+consB=consB[,c(1:10)]#
+ressB=ressB[,c(1:6,8)]#
+#
+ressDB=rbind(ressB,ressD)#
+consDB=rbind(consB,consD)#
+#
+ressDB=merge(ressDB,axes,by.x="Num",by.y="row.names")#
+consDB=merge(consDB,axes,by.x="Num",by.y="row.names")#
+#
+interD=data$interD#
+interB=data$interB#
+interD=unique(interD[,2:4])#
+interD$Consumer=paste(interD$Consumer,"DIG",sep=" ")#
+interD$Resource=paste(interD$Resource,"DIG",sep=" ")#
+interBD=rbind(interD,interB)
+dataPar=merge(interBD,ressDB,by.x="Consumer","Num")#
+dataPar=merge(dataPar,consDB,by.x="Resource","Num")#
+#
+dataPar$Web=as.factor(dataPar$Web)#
+dataPar$Poison=as.factor(dataPar$Poison)#
+dataPar$Herbivore =as.factor(dataPar$Herbivore)#
+dataPar$Carnivore=as.factor(dataPar$Carnivore)#
+dataPar$Fungivore=as.factor(dataPar$Fungivore)#
+dataPar$Detritivore=as.factor(dataPar$Detritivore)#
+dataPar$Aboveground.x=as.factor(dataPar$Aboveground.x)#
+dataPar$Belowground.x=as.factor(dataPar$Belowground.x)#
+dataPar$Toughness=as.factor(dataPar$Toughness)#
+dataPar$Mobility=as.factor(dataPar$Mobility)#
+dataPar$Aboveground.y=as.factor(dataPar$Aboveground.y)#
+dataPar$Belowground.y=as.factor(dataPar$Belowground.y)#
+#
+dataPar$Bodymass.x=log(dataPar$Bodymass.x+1)#
+dataPar$Bodymass.y=log(dataPar$Bodymass.y+1)
+dataParCarn=subset(dataPar,Kingdom=="Animalia" & Carnivore==1)#
+dataParCarn=dataParCarn[,(-which(names(dataParCarn) %in% c("Carnivore","Herbivore","Fungivore","Detritivore","Kingdom")))]
+dataParHFD=subset(dataPar,Kingdom!="Animalia")#
+rfHFD=randomForest(Interac~.,dataParHFD)
+head(dataParHFD)
+head(dataPar)
+dataParCarn=subset(dataPar,Kingdom=="Animalia" & Carnivore==1)
+head(dataParCarn)
+head(interBD)
+head(ressDB)
+head(consDB)
+head(consB)
+tail()consB
+ressDB=rbind(ressB,ressD)#
+consDB=rbind(consB,consD)
+head(ressDB)
+head(axes)
+100/0.001
+0.001*100
+10000
