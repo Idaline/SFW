@@ -1,6 +1,9 @@
-library(randomForest)
-library(plyr)
-
+#'Creates a dataframe species interactions
+#'
+#' @descSp Matrix with species traits (column names: Num, Bodymass, optional:CN) and taxonomy (column names: Kingdom, Phylum, Class, Order, Family). 
+#' @axes a list with the 2 dataframes with species as rows, their names in the row.names, and their scores on the 2 first axes of the Pcoa of their taxonomy, created by 'MakePhylo'.
+#' @return a matrix containing in order a column with consumers name, a column with resources name, and a column with the interactions between them (1 or 0). 
+#' @export
 predictInter=function(descSp,axes)
 {
 
@@ -39,8 +42,6 @@ TrRC=data.frame(d,TrC)
 TrRC=unique(TrRC)
 
 ########### Données
-
-load('data/data.RData')
 
 consD=data$consD
 ressD=data$ressD
@@ -130,8 +131,3 @@ inter=rbind(interPredHFD,interPredC)
 
 return(inter)
 }
-
-
-
-###########
-

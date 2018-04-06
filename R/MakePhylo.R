@@ -1,9 +1,11 @@
+#'Creates a dataframe with species scores on the 2 first axes of the Pcoa of their taxonomy.
+#'
+#' @NewTaxo A dataframe or matrix with species names and taxonomy (column names: Num, Kingdom, Phylum, Class, Order, Family, Genus). Determining taxonomy with taxize (with option  db='bold') is advised to be consistent with parametrization data. 
+#' @MakePhyloO do you want to update the taxonomy of the data used for parametrization, by default TRUE, but takes time.
+#' @return a list with 2 dataframes with species as rows, their names in the row.names, and their scores on the 2 first axes of the Pcoa of their taxonomy. YourData contains your species scores and ParamData contains parametrization species scores. 
+#' @export
 makePhylo=function(NewTaxo,MakePhyloO=TRUE)
 {
-
-	library(ade4)
-	library(ape)
-	library(taxize)
 
 ##### New data
 
@@ -16,17 +18,12 @@ NewTax=data.frame(Genus=NewTaxo$Genus,Family=NewTaxo$Family,Order=NewTaxo$Order,
 
 	if(MakePhyloO==FALSE)
 	{
-		load('data/taxoAll.RData')
 		row.names(taxT)=taxT$Num
 		taxT=taxT[,-(1:2)]
 		OldTax=taxT
 		
 	} else
 	{
-	
-	load('data/data.RData')	
-	load('data/taxoInc.RData')	
-
 	
 	Dig=data.frame(data$consD)	
 	BibR=data.frame(data$ressB)

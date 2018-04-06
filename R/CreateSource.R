@@ -1,6 +1,11 @@
-library(plyr)
-
-CreateSource=function(inter,descSp,name,setPref=TRUE)
+#'Creates an interaction matrix (inter) and a dataframe with species parameters needed for the dynamical model. 
+#'
+#' @inter Matrix containing in order a column with consumers name, a column with resources name, and a column with the interactions between them (1 or 0). 
+#' @descSp Matrix with species traits (column names: Num, Bodymass, optional:CN) and taxonomy (column names: Kingdom, Phylum, Class, Order, Family)
+#' @setPref by default TRUE if you want to calculate interactions preferences between your species, if FALSE the third column of the file inter should contain interaction preferences of consumers for each of its resources which summed to 1.
+#' @return a list containing a dataframe with species parameters and a matrix with species interaction preferences
+#' @export
+CreateSource=function(inter,descSp,setPref=TRUE)
 {
 ########## Param
 	Prod=nrow(subset(descSp,Kingdom=="Plantae"))
@@ -117,9 +122,8 @@ hrm=unique(data.frame(Num=hra$Num,group=hra$group,type=hra$type,biomass=hra$biom
 	param2$bodymass=as.double(param2$bodymass)
 	options(scipen=500)
 	param2$bodymass=as.character(param2$bodymass)		
-	tparam=t(param2)
-		
-	write.table(tparam,file=paste("name_","param",".txt",sep=""),sep=" ",row.names=TRUE,col.names=FALSE, quote = FALSE)
+	param=t(param2)
+	
 		
 ######## Pref
 	
@@ -194,12 +198,15 @@ hrm=unique(data.frame(Num=hra$Num,group=hra$group,type=hra$type,biomass=hra$biom
 		FBPrey=merge(FBP,totprey,by.x="Nconso",by.y="Group.1")
 		FBPrey$inter=FBPrey$p/FBPrey$x
 		FBPrey=FBPrey[,c(2,1,7)]
+	} else
+	{	
+		FBPrey=data.frame(inter[,2],inter[,1],inter[,3])
 	}	
-		
 		
 	colnames(FBPrey)=c("Ress","Cons","Preference")
 	FBPrey=unique(FBPrey)
-	tAllGp1=t(FBPrey)
-	write.table(tAllGp1,file=paste("name_","pref",".txt",sep=""),sep=" ",row.names=TRUE,col.names=FALSE, quote = FALSE)
-
+	pref=t(FBPrey)
+	
+	SourceFiles=list(param,pref)
+	return(SourceFiles)
 }

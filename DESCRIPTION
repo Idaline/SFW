@@ -1,0 +1,16 @@
+Package: SFW
+Title: Modelling soil food web dynamic (one line, title case)
+Version: 0.0.0.9000
+Authors@R: person("Idaline", "Laigle", email = "idaline.laigle@gmail.com", role = c("aut", "cre"))
+Description: This package allows you to determine interactions between your species from their traits. You can then model your soil community dynamic.
+Depends: R (>= 3.3.3)
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports:
+	plyr,
+	ade4,
+	ape,
+	taxize,
+	randomForest
+RoxygenNote: 6.0.1
