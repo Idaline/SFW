@@ -1,10 +1,10 @@
 #'Creates a dataframe with species scores on the 2 first axes of the Pcoa of their taxonomy.
 #'
 #' @NewTaxo A dataframe or matrix with species names and taxonomy (column names: Num, Kingdom, Phylum, Class, Order, Family, Genus). Determining taxonomy with taxize (with option  db='bold') is advised to be consistent with parametrization data. 
-#' @MakePhyloO do you want to update the taxonomy of the data used for parametrization, by default TRUE, but takes time.
+#' @MakePhyloO do you want to update the taxonomy of the data used for parametrization, by default FALSE.
 #' @return a list with 2 dataframes with species as rows, their names in the row.names, and their scores on the 2 first axes of the Pcoa of their taxonomy. YourData contains your species scores and ParamData contains parametrization species scores. 
 #' @export
-makePhylo=function(NewTaxo,MakePhyloO=TRUE)
+makePhylo=function(NewTaxo,MakePhyloO=FALSE)
 {
 
 ##### New data
@@ -16,11 +16,18 @@ NewTax=data.frame(Genus=NewTaxo$Genus,Family=NewTaxo$Family,Order=NewTaxo$Order,
 	
 ##### 
 
-	if(MakePhyloO==FALSE)
+	if(MakePhyloO==FALSE) #Les distances ne changent pas 
 	{
-		row.names(taxT)=taxT$Num
-		taxT=taxT[,-(1:2)]
-		OldTax=taxT
+		TTNew=rbind(NewTax,taxT)
+		TTNew=droplevels(TTNew)
+		tax=as.taxo(TTNew)
+		t=dist.taxo(tax)
+		#Fixer les nouvelles distances sur lancienne Pcoa sauvée
+		axes=data.frame(Pcoa2$l1)
+		axesN=axes[which(!is.na(match(row.names(axes),row.names(NewTax)))),]
+		axesO=axes[which(is.na(match(row.names(axes),row.names(NewTax)))),]
+		axes=list(axesN,axesO)
+		names(axes)=c('YourData','ParamData')
 		
 	} else
 	{
@@ -89,11 +96,9 @@ pRR=data.frame(Family=pR$family,Order=pR$order,Class=pR$class,Phylum=pR$phylum,i
 	taxT=unique(taxT)
 	row.names(taxT)=taxT$Num
 	taxT=taxT[,(-which(names(taxT) %in% "Num"))]	
-	
-TTNtax2=data.frame(Genus=TTNtax$Genus,Family=TTNtax$Family,Order=TTNtax$Order,Class=TTNtax$Class,Phylum=TTNtax$Phylum,Kingdom=TTNtax$Kingdom)
+TTNtax2=data.frame(Genus=TTNtax$Genus,Family=TTNtax$Genus,Order=TTNtax$Genus,Class=TTNtax$Genus,Phylum=TTNtax$Genus,Kingdom=TTNtax$Kingdom)	
 	row.names(TTNtax2)=TTNtax$Num
-	OldTax=rbind(taxT,TTNtax2)	
-	}	
+	OldTax=rbind(taxT,TTNtax2)		
 	############### Distance phylo
 	
 	TT3=rbind(OldTax,NewTax)
@@ -113,5 +118,7 @@ TTNtax2=data.frame(Genus=TTNtax$Genus,Family=TTNtax$Family,Order=TTNtax$Order,Cl
 	axesO=axes[which(is.na(match(row.names(axes),row.names(NewTax)))),]
 	axes=list(axesN,axesO)
 	names(axes)=c('YourData','ParamData')
+	}
+	
 	return(axes)
 }

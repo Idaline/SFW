@@ -10,7 +10,6 @@ LazyData: true
 Imports:
 	plyr,
 	ade4,
-	ape,
 	taxize,
 	randomForest
 RoxygenNote: 6.0.1

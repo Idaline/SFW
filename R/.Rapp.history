@@ -1,0 +1,144 @@
+load("/Users/idaline/Documents/Ecole/These/SFW/data/data.rda")
+load("/Users/idaline/Desktop/sauvPkg/data.RData")
+Dig=data.frame(data$consD)	#
+	BibR=data.frame(data$ressB)#
+	BibC=data.frame(data$consB)#
+	Dig=Dig[,c(1,11:13)]#
+	Bib=rbind(BibR[,c(1,7:9)],BibC[,c(1,11:13)])#
+	TT=rbind(Dig,Bib)#
+	Bib$Kingdom[which(Bib$Phylum=='Euglenozoa')]='Protozoa'#
+	TTNtax=subset(TT,Genus=="Plantae" | Genus=="Fungi" | Genus=="Bacteria" | Genus=="Protozoa" | Genus=="Nematoda" | Genus=="Larve" | Genus=="Algae" | Genus=="Detritus"  | Genus=="Yeast" |  Genus=="lichen" | Genus=="Lichen")#
+	TTtax=subset(TT,Genus!="Plantae" & Genus!="Fungi" & Genus!="Bacteria" & Genus!="Protozoa" & Genus!="Nematoda" & Genus!="Larve" & Genus!="Algae" & Genus!="Detritus" & Genus!="Yeast" & Genus!="lichen" & Genus!="Lichen")#
+	TTtaxA=subset(TTtax,Kingdom=='Animalia')#
+	TTtaxF=subset(TTtax,Kingdom=='Fungi')#
+	TTtaxP=subset(TTtax,Kingdom=='Plantae')#
+	TTtaxR=subset(TTtax,Kingdom=='Protozoa' | Kingdom=='Bacteria')
+head(TTtaxA)
+tail(TTtaxA)
+r=data.frame(data$ressD)
+r=subset(r,Kingdom!="Plantae")
+summary(Dig)
+nrow(Dig)
+nrow(ressD)
+nrow(r)
+nrow(BibR)
+nrow(BibC)
+322+340+878
+nrow(TT)
+nrow(TTtaxA)+nrow(TTtaxF)+nrow(TTtaxP)+nrow(TTtaxR)
+nrow(TTNtax)
+nrow(taxT)
+load("/Users/idaline/Desktop/sauvPkg/taxoAll.RData")
+head(taxT)
+head(TTNtax)
+TTNtax=data.frame(Num=TTNtax$Num,sp=TTNtax$Species,Genus=TTNtax$Genus,Family=TTNtax$Genus,Order=TTNtax$Genus,Class=TTNtax$Genus,Phylum=TTNtax$Genus,Kingdom=TTNtax$Kingdom)
+taxT=rbind(taxT,TTNtax)
+save(taxT,file="~/Desktop/sauvPkg/taxoAll.RData")
+head(taxT)
+row.names(taxT)=taxT[,1]
+taxT=taxT[,-(1:2)]
+head(taxT)
+save(taxT,file="~/Desktop/sauvPkg/taxoAll.RData")
+nrow(taxT)
+TT3=taxT
+TT3$Order=as.character(TT3$Order)#
+	TT3$Order[which(TT3$Order=="Mesostigmata")]="Parasitiformes"#
+	TT3$Family=as.factor(TT3$Family)#
+	TT3$Order=as.factor(TT3$Order)#
+	TT3$Class=as.factor(TT3$Class)#
+	TT3=droplevels(TT3)
+library(ade4)
+tax=as.taxo(TT3)
+t=dist.taxo(tax)
+Pcoa2=dudi.pco(t,scannf=FALSE,nf=2)
+pcoaTax=Pcoa2
+save(pcoaTax,file="~/Documents/Ecole/These/SFW/data/pcoaTax.RData")
+axes=data.frame(Pcoa2$l1)
+save(axes,file="~/Desktop/sauvPkg/axes.RData")
+nrow(axes)
+f=matrix(0,4,4)
+diag(f)=0
+f[2,1]=1
+f[3,1]=2
+f[4,1]=3
+f[4,2]=2
+f[4,3]=3
+f[3,2]=1
+f
+f=as.dist(f)
+f
+library(ade4)
+pco=dudi.pco(f)
+score1=pco$l1
+score1
+biplot(pco)
+f[5,]=c(1,2,3,4,0)
+f=rbind(f,c(1,2,3,4,0))
+f
+f=matrix(0,4,4)#
+diag(f)=0#
+f[2,1]=1#
+f[3,1]=2#
+f[4,1]=3#
+f[4,2]=2#
+f[4,3]=3#
+f[3,2]=1
+f=rbind(f,c(1,2,3,4))
+f[,5]=0
+f=cbind(f,0)
+f
+f=as.dist(f)
+pco=dudi.pco(f)
+scores2=pco$l1
+scores1
+score1
+score2
+scores2
+c=read.table("~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/conso.csv",head=TRUE,sep=";")
+head(c)
+f=c[c(1:2,300,100,600),]
+f
+f=f[,11:16]
+TTNew=f
+tax=as.taxo(TTNew)
+TTNew=droplevels(TTNew)
+tax=as.taxo(TTNew)
+TTNew
+TTNew=TTNew[,1:4]
+tax=as.taxo(TTNew)
+TTNew
+TTNew=TTNew[,-1]
+tax=as.taxo(TTNew)
+TTNew$Family[4]="Staphylinidae"
+tax=as.taxo(TTNew)
+TTNew
+TTNew=droplevels(TTNew)
+tax=as.taxo(TTNew)
+t=dist.taxo(tax)
+t
+savt=t
+TTNew
+TTNew$Family=as.character(TTNew$Family)
+TTNew=rbind(TTNew,c("Curcu","Coleoptera","Insecta"))
+TTNew
+tax=as.taxo(TTNew)
+TTNew$Family=as.factor(TTNew$Family)
+tax=as.taxo(TTNew)
+t=dist.taxo(tax)
+savt
+t
+TTNew$Order=as.character(TTNew$Order)
+TTNew$Class=as.character(TTNew$Class)
+TTNew=rbind(TTNew,c("Curcu","Chop","Boling"))
+TTNew$Class=as.factor(TTNew$Class)
+TTNew$Order=as.factor(TTNew$Order)
+TTNew
+TTNew=TTNew[-6,]
+TTNew
+tax=as.taxo(TTNew)
+t=dist.taxo(tax)
+savt
+t
+dudi.pco
+procrustes
+procruste
