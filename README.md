@@ -15,5 +15,7 @@ Creates text files which are dataframes with species parameters and with species
 
 ##RunModel
 
+Unix only
+
 Run the dynamic model of your community with the files created by "CreateSource" and a vector containing the ending time (suggested:100), the time step (suggested:0.01), the N input, the N output (\%), the detritus input (e.g. from trees), the detritus input C:N. Creates a text file with species biomass in function of time. 
 

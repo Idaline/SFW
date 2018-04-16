@@ -1,381 +1,669 @@
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-load('data/taxoAll.RData')
-row.names(taxT)=taxT$Num
-head(taxT)
-subset(taxT,Num=='1002 C')
-subset(taxT,Num=='1034 DIG')
-consR$Num
-consD$Num
-ressD$Num
-head(ressD)
-ressD$X
-ressB$Num
-consB$Num
-taxT=unique(taxT)
-row.names(taxT)=taxT$Num
-load('data/taxoAll.RData')
-taxT=unique(taxT)
-save(taxT,file='data/taxoAll.RData')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-load('data/taxoAll.RData')#
-		row.names(taxT)=taxT$Num#
-		taxT=taxT[,-(1:2)]#
-		OldTax=taxT
-NewTax=data.frame(Genus=NewTaxo$Genus,Family=NewTaxo$Family,Order=NewTaxo$Order,Class=NewTaxo$Class,Phylum=NewTaxo$Phylum,Kingdom=NewTaxo$Kingdom)#
-	row.names(NewTax)=NewTaxo$Num
-TT3=rbind(OldTax,NewTax)#
-	TT3$Order=as.character(TT3$Order)#
-	TT3$Order[which(TT3$Order=="Mesostigmata")]="Parasitiformes"#
-	TT3$Family=as.factor(TT3$Family)#
-	TT3$Order=as.factor(TT3$Order)#
-	TT3$Class=as.factor(TT3$Class)#
-	TT3=droplevels(TT3)#
-	tax=as.taxo(TT3)
-subset(TT3,Genus=='Diplopoda')
-subset(OldTax,Genus=='Diplopoda')
-subset(taxT,Genus=='Diplopoda')
-subset(taxT,is.na(Family))
-taxT[which(is.na(taxT$Family))]=taxT$Genus[which(is.na(taxT$Family))]
-taxT$Family[which(is.na(taxT$Family))]=taxT$Genus[which(is.na(taxT$Family))]
-subset(taxT,is.na(Family))
-taxT$Order[which(is.na(taxT$Order))]=taxT$Genus[which(is.na(taxT$Order))]
-summary9taxT
-summary(taxT)
-load('data/taxoAll.RData')
-taxT$Order[which(is.na(taxT$Family))]=taxT$Genus[which(is.na(taxT$Family))]
-taxT$Family[which(is.na(taxT$Family))]=taxT$Genus[which(is.na(taxT$Family))]
-save(taxT,file='data/taxoAll.RData')
-unique(taxT$Order)
-subset(taxT,Order=='552')
-summary(taxT)
-taxT$Order[which(taxT$Order=='552')]='Insecta'
-taxT$Family[which(taxT$Family=='552')]='Insecta'
-subset(taxT,Order=='611' | Order=='640' | Order=='442' | Order=='77' | Order=='668' | Order=='476' | Order=='746' )
-a=subset(taxT,Order=='611' | Order=='640' | Order=='442' | Order=='77' | Order=='668' | Order=='476' | Order=='746' )
-taxT=subset(taxT,Order!='611' & Order!='640' & Order!='442' & Order!='77' & Order!='668' & Order!='476' & Order!='746' )
-a
-summary(a)
-a$Genus=as.character(a$Genus)
-a$Family=a$Genus
-a$Order=a$Genus
-a
-taxT=rbind(taxT,a)
-tail9taxT
-unique(taxT$Family)
-unique(taxT$Order)
-unique(taxT$Class)
-unique(taxT$Phylum)
-subset(taxT$Family=='504')
-subset(taxT,Family=='504')
-summary(taxT)
-taxT$Family[which(taxT$Family=='504')]='Diplura'
-taxT$Order[which(taxT$Family=='504')]='Diplura'
-save(taxT,file='data/taxoAll.RData')
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-subset(taxT,Ganus==' Nargus')
-subset(taxT,Genus=='Nargus')
-NewTaxo
-NewTaxo=subset(NewTaxo,Genus!='Nargus')
-nrow(NewTaxo)
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-subset(taxT,GEnus== Sminthurides)
-subset(taxT,Genus== Sminthurides)
-subset(taxT,Genus=='Sminthurides')
-NewTaxo=subset(NewTaxo,Genus!='Sminthurides')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-NewTaxo=subset(NewTaxo,Family!='Tullbergiidae')
-NewTaxo=subset(NewTaxo,Family!='Scutigerellidae')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-subset(taxT,Family=='Tullbergiidae')
-subset(taxT,Order=='Collembola')
-nrow(NewTaxo)
-taxT$Order[which(taxT$Order=='Collembola')]='Poduromorpha'
-save(taxT,file='data/taxoAll.RData')
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-subset(taxT,Phylum=='Magnoliophyta')
-head(IncT)
-subset(IncT,Genus=='Leitneria')
-subset(taxT,Genus=='Leitneria')
-taxT[which(taxT$Genus=='Leitneria'),4:7]=c('Halolaelapidae','Parasitiformes','Arachnida','Arthropoda')
-summary(taxT)
-taxT$Class=as.character(taxT$Class)
-taxT[which(taxT$Genus=='Leitneria'),4:7]=c('Halolaelapidae','Parasitiformes','Arachnida','Arthropoda')
-subset(taxT,Genus=='Leitneria')
-which(taxT$Genus=='Leitneria')
-taxT[807,4:7]=c('Halolaelapidae','Parasitiformes','Arachnida','Arthropoda')
-taxT[808,4:7]=c('Halolaelapidae','Parasitiformes','Arachnida','Arthropoda')
-summary(taxT)
-save(taxT,file='data/taxoAll.RData')
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-subset(taxT,Phylum=='Euglenozoa')
-Bib$Kingdom[which(Bib$Phylum=='Euglenozoa')]='Protozoa'
-taxT$Kingdom[which(taxT$Phylum=='Euglenozoa')]='Protozoa'
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-subset(NewTaxo,Kingdom=='Bacteria')
-subset(taxT,Phylum=='Euglenozoa')
-subset(NewTaxo,Phylum=='Euglenozoa')
-save(taxT,file='data/taxoAll.RData')
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-source('MakePhylo.R')
-source('MakePhylo.R')
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-head(g)
-tail(g)
-head(NewTaxo)
-row.names(g)
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-head(g)
-nrow(g)
-tail(g)
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-head(g)
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-source('MakePhylo.R')
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-head(g)
-load('data/taxoAll.RData')#
-		row.names(taxT)=taxT$Num#
-		taxT=taxT[,-(1:2)]#
-		OldTax=taxT
-TT3=rbind(OldTax,NewTax)#
-	TT3$Order=as.character(TT3$Order)#
-	TT3$Order[which(TT3$Order=="Mesostigmata")]="Parasitiformes"#
-	TT3$Family=as.factor(TT3$Family)#
-	TT3$Order=as.factor(TT3$Order)#
-	TT3$Class=as.factor(TT3$Class)#
-	TT3=droplevels(TT3)#
-	tax=as.taxo(TT3)#
-	t=dist.taxo(tax)
-NewTax=data.frame(Genus=NewTaxo$Genus,Family=NewTaxo$Family,Order=NewTaxo$Order,Class=NewTaxo$Class,Phylum=NewTaxo$Phylum,Kingdom=NewTaxo$Kingdom)#
-	row.names(NewTax)=NewTaxo$Num
-TT3=rbind(OldTax,NewTax)#
-	TT3$Order=as.character(TT3$Order)#
-	TT3$Order[which(TT3$Order=="Mesostigmata")]="Parasitiformes"#
-	TT3$Family=as.factor(TT3$Family)#
-	TT3$Order=as.factor(TT3$Order)#
-	TT3$Class=as.factor(TT3$Class)
-TT3=droplevels(TT3)#
-	tax=as.taxo(TT3)#
-	t=dist.taxo(tax)
-Pcoa2=dudi.pco(t,scannf=FALSE,nf=2)#
-	axes=data.frame(Pcoa2$l1)
-head(axes)
-axesN=merge(axes,NewTax,by='row.names')
-head(axesN)
-tail(axesN)
-axesN$Row.Names
-axesN$Row.names
-summary(axesN)
-summary(NewTax)
-class(row.names(NewTax))
-NewTax$Num=row.names(NewTax)
-head(NewTax)
-NewTax=data.frame(Genus=NewTaxo$Genus,Family=NewTaxo$Family,Order=NewTaxo$Order,Class=NewTaxo$Class,Phylum=NewTaxo$Phylum,Kingdom=NewTaxo$Kingdom)#
-	row.names(NewTax)=NewTaxo$Num
-head(NewTax)
-head(NewTaxo)
-colnames(NewTaxo)[1]='Num'
-NewTax=data.frame(Genus=NewTaxo$Genus,Family=NewTaxo$Family,Order=NewTaxo$Order,Class=NewTaxo$Class,Phylum=NewTaxo$Phylum,Kingdom=NewTaxo$Kingdom)#
-	row.names(NewTax)=NewTaxo$Num
-head(NewTax)
-TT3=rbind(OldTax,NewTax)
-TT3$Order=as.character(TT3$Order)#
-	TT3$Order[which(TT3$Order=="Mesostigmata")]="Parasitiformes"#
-	TT3$Family=as.factor(TT3$Family)#
-	TT3$Order=as.factor(TT3$Order)#
-	TT3$Class=as.factor(TT3$Class)#
-	TT3=droplevels(TT3)#
-	tax=as.taxo(TT3)#
-	t=dist.taxo(tax)#
-	Pcoa2=dudi.pco(t,scannf=FALSE,nf=2)#
-	axes=data.frame(Pcoa2$l1)
-head(axes)
-axes=[which(!is.na(match(row.names(axes),row.names(NewTax)))),]
-axes=axes[which(!is.na(match(row.names(axes),row.names(NewTax)))),]
-axes=axes[which(!is.na(match(row.names(axes),row.names(NewTax)))),]
-head(axes)
-axes
-source('MakePhylo.R')
-g=makePhylo(NewTaxo,MakePhyloO=FALSE)
-head(g)
-head(NewTaxo)
-ls()
-head(newData)
-g=predictInter(newData,g)
-colnames(newData)[1]='Num'
-e=predictInter(newData,g)
-descSp=newData
-axes=g
-TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")
-TrTx$Web[which(is.na(TrTx$Web))]=0
-newData=merge(newData,consD,by.x='Num',by.y='X')
-head(newData)
-head(consD)
-newData=merge(newData,consD,by='Num')
-head(newData)
-consD=read.table("~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/conso.csv",head=TRUE,sep=";")
-consD=consD[,c(1:4,6,7,5,8,9,10,11,16,17)]
-head(consD)
-consD=consD[,-(c(2,9:13))]
-head(consD)
-newData=merge(newData,consD,by.x='Num',by.y='X')
-head(newData)
-newData=consB[1:100,]
-head(newData)
-newData=ressD[1:100,]
-head(newData)
-newData=merge(newData,consD,by.x='X',by.y='X')
-head(newData)
-newData=newData[,-(14:15)]
-colnames(newData)[1]='Num'
-descSp=newData
-TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")
-TrTx$Web[which(is.na(TrTx$Web))]=0
-TrTx$LogBM=log(TrTx$Bodymass+1)
-colnames(newData)[1]='Bodymass'
-TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")#
-TrTx$Web[which(is.na(TrTx$Web))]=0#
-#
-TrTx$LogBM=log(TrTx$Bodymass+1)
-head(TrTx)
-descSp=newData
-TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")#
-TrTx$Web[which(is.na(TrTx$Web))]=0#
-#
-TrTx$LogBM=log(TrTx$Bodymass+1)
-head(descSp)
-descSp[1]=Num
-descSp[1]='Num'
-descSp[2]='Bodymass'
-TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")#
-TrTx$Web[which(is.na(TrTx$Web))]=0#
-#
-TrTx$LogBM=log(TrTx$Bodymass+1)
-head(descSp)
-descSp=newData
-head(newData)
-colnames(descSp)[,1:2]=c('Num','Bodymass')
-colnames(descSp)[1:2]=c('Num','Bodymass')
-head(descSp)
-TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")
-TrTx$Web[which(is.na(TrTx$Web))]=0
-TrTx$LogBM=log(TrTx$Bodymass+1)
-TrTx$LogBM[is.na(TrTx$LogBM)]=0
-TrTx$Web=as.factor(TrTx$Web)#
-TrTx$Poison=as.factor(TrTx$Poison)#
-TrTx$Herbivore =as.factor(TrTx$Herbivore)#
-TrTx$Carnivore=as.factor(TrTx$Carnivore)#
-TrTx$Fungivore=as.factor(TrTx$Fungivore)#
-TrTx$Detritivore=as.factor(TrTx$Detritivore)#
-TrTx$Aboveground=as.factor(TrTx$Aboveground)#
-TrTx$Belowground=as.factor(TrTx$Belowground)#
-TrTx$Toughness=as.factor(TrTx$Toughness)#
-TrTx$Mobility=as.factor(TrTx$Mobility)
-head(descSp)
-colnames(descSp)[3:6]=c('Toughness','Mobility','Aboveground','Belowground')
-colnames(descSp)[16:19]=c('Carnivore','Fungivore','Herbivore','Detritivore')
-TrTx=merge(descSp,axes,by.x="Num",by.y="row.names")#
-TrTx$Web[which(is.na(TrTx$Web))]=0#
-#
-TrTx$LogBM=log(TrTx$Bodymass+1)#
-TrTx$LogBM[is.na(TrTx$LogBM)]=0#
-#
-TrTx$Web=as.factor(TrTx$Web)#
-TrTx$Poison=as.factor(TrTx$Poison)#
-TrTx$Herbivore =as.factor(TrTx$Herbivore)#
-TrTx$Carnivore=as.factor(TrTx$Carnivore)#
-TrTx$Fungivore=as.factor(TrTx$Fungivore)#
-TrTx$Detritivore=as.factor(TrTx$Detritivore)#
-TrTx$Aboveground=as.factor(TrTx$Aboveground)#
-TrTx$Belowground=as.factor(TrTx$Belowground)#
-TrTx$Toughness=as.factor(TrTx$Toughness)#
-TrTx$Mobility=as.factor(TrTx$Mobility)
-TrR=data.frame(Resource=TrTx$Num,Bodymass.x=TrTx$LogBM,Toughness=TrTx$Toughness, Mobility=TrTx$Mobility,Aboveground.x=TrTx$Aboveground,Belowground.x=TrTx$Belowground,Kingdom=TrTx$Kingdom,RS1.x=TrTx$RS1,RS2.x=TrTx$RS2)#
-#
-TrC=data.frame(Consumer=TrTx$Num,Bodymass.y=TrTx$LogBM,Web=TrTx$Web,Poison=TrTx$Poison,Carnivore=TrTx$Carnivore,Fungivore=TrTx$Fungivore,Herbivore=TrTx$Herbivore,Detritivore=TrTx$Detritivore,Aboveground.y=TrTx$Aboveground,Belowground.y=TrTx$Belowground,RS1.y=TrTx$RS1,RS2.y=TrTx$RS2)
-TrR=unique(TrR)#
-TrC=unique(TrC)#
-d=rbind(TrR,TrR)#
-for (i in 2:nrow(TrC))#
-{#
-	d=rbind(d,TrR)#
-}#
-d=arrange(d,Resource)#
-TrRC=data.frame(d,TrC)#
-TrRC=unique(TrRC)#
-#
-########### Données#
-#
-load('data/data.RData')#
-#
-consD=data$consD#
-ressD=data$ressD#
-consD=consD[,c(1:10)]#
-ressD=ressD[,c(1:6,8)]
-consB=data$consB#
-ressB=data$ressB#
-consB=consB[,c(1:10)]#
-ressB=ressB[,c(1:6,8)]#
-#
-ressDB=rbind(ressB,ressD)#
-consDB=rbind(consB,consD)#
-#
-ressDB=merge(ressDB,axes,by.x="Num",by.y="row.names")#
-consDB=merge(consDB,axes,by.x="Num",by.y="row.names")#
-#
-interD=data$interD#
-interB=data$interB#
-interD=unique(interD[,2:4])#
-interD$Consumer=paste(interD$Consumer,"DIG",sep=" ")#
-interD$Resource=paste(interD$Resource,"DIG",sep=" ")#
-interBD=rbind(interD,interB)
-dataPar=merge(interBD,ressDB,by.x="Consumer","Num")#
-dataPar=merge(dataPar,consDB,by.x="Resource","Num")#
-#
-dataPar$Web=as.factor(dataPar$Web)#
-dataPar$Poison=as.factor(dataPar$Poison)#
-dataPar$Herbivore =as.factor(dataPar$Herbivore)#
-dataPar$Carnivore=as.factor(dataPar$Carnivore)#
-dataPar$Fungivore=as.factor(dataPar$Fungivore)#
-dataPar$Detritivore=as.factor(dataPar$Detritivore)#
-dataPar$Aboveground.x=as.factor(dataPar$Aboveground.x)#
-dataPar$Belowground.x=as.factor(dataPar$Belowground.x)#
-dataPar$Toughness=as.factor(dataPar$Toughness)#
-dataPar$Mobility=as.factor(dataPar$Mobility)#
-dataPar$Aboveground.y=as.factor(dataPar$Aboveground.y)#
-dataPar$Belowground.y=as.factor(dataPar$Belowground.y)#
-#
-dataPar$Bodymass.x=log(dataPar$Bodymass.x+1)#
-dataPar$Bodymass.y=log(dataPar$Bodymass.y+1)
-dataParCarn=subset(dataPar,Kingdom=="Animalia" & Carnivore==1)#
-dataParCarn=dataParCarn[,(-which(names(dataParCarn) %in% c("Carnivore","Herbivore","Fungivore","Detritivore","Kingdom")))]
-dataParHFD=subset(dataPar,Kingdom!="Animalia")#
-rfHFD=randomForest(Interac~.,dataParHFD)
-head(dataParHFD)
-head(dataPar)
-dataParCarn=subset(dataPar,Kingdom=="Animalia" & Carnivore==1)
-head(dataParCarn)
-head(interBD)
-head(ressDB)
-head(consDB)
+classification(98597, db = 'itis')
+get_ids("Chironomus riparius")
+h=get_boldid(TT$sp)
+head(cons)
+f2=strsplit(as.character(cons$sp)," ")
+f3=do.call(rbind,f2)
+f3=data.frame(f3)
+head(f3)
+f3
+head(TT)
+h=get_boldid(TT$Genus)
+head(h)
+tail(TT)
+TT
+TTNtax=subset(TT,Genus=="Plantae" | Genus=="Fungi" | Genus=="Bacteria" | Genus=="Protozoa" | Genus=="Nematoda" | Genus=="Larve" | Genus=="Algae" | Genus=="Detritus")
+TTtax=subset(TT,Genus=="Plantae" & Genus=="Fungi" & Genus=="Bacteria" & Genus=="Protozoa" & Genus=="Nematoda" & Genus=="Larve" & Genus=="Algae" & Genus=="Detritus")
+TTtax=subset(TT,Genus!="Plantae" & Genus!="Fungi" & Genus!="Bacteria" & Genus!="Protozoa" & Genus!="Nematoda" & Genus!="Larve" & Genus!="Algae" & Genus!="Detritus")
+head(TTtax)
+TTtax=TTtax[1:5,]
+h=get_boldid(TTtax$Genus)
+h
+classification(h[1], db = 'itis')
+h[1]
+h[2]
+classification(h, db = 'itis')
+classification(h)
+p=classification(h)
+p[1]
+p[1,1]
+p[[1]]
+cbind(p)
+consB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/consBib.csv')
 head(consB)
-tail()consB
-ressDB=rbind(ressB,ressD)#
-consDB=rbind(consB,consD)
-head(ressDB)
-head(axes)
-100/0.001
-0.001*100
-10000
+ressB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/ressBib.csv')
+interB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/interBib.csv')
+interB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/interBib.csv',sep=';')
+head(interB)
+interB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/interBib.csv',sep=',')
+head(interB)
+consD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/conso.csv')
+head(consD)
+ressD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/resso.csv')
+interD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/interac.csv')
+head(consB)
+consB=consB[,c(1,7:17)]
+head(ressB)
+ressB=ressB[,c(1,7:13)]
+head(consD)
+consD=consD[,c(1:11,17)]
+head(ressD)
+ressD=ressD[,c(1:7,13)]
+head(interD)
+interD=interD[,c(4,6,7,5)]
+data=list(consD,ressD,interD,consB,ressB,interB)
+names(data)
+names(data)[1]
+names(data)='jh'
+names(data)
+names(data)=c('consDig','ressDig','interDig','consBib','ressBib','interBib')
+names(data)
+save(data,file='~/Documents/Ecole/These/PkgFW/data/data.RData')
+cons=data.frame(data$consDig)
+head(cons)
+Dig=data.frame(data$consDig)
+BibR=data.frame(data$consBib)
+BibR=data.frame(data$ressBib)#
+	BibC=data.frame(data$consBib)
+head(BibR)
+head(BibC)
+head(Dig)
+Dig=data.frame(Num=paste(Dig$X,"_DIG",sep=" "),cons[,11:12])
+Bib=rbind(BibR[,c(1,2,3)],BibC[,c(1,2,3)])
+head(Bib)
+colnames(Bib)=colnames(Dig)
+BD=rbind(Dig,Bib)
+head(BD)
+Dig=data.frame(data$consDig)
+Dig=data.frame(Num=paste(Dig$X,"DIG",sep=" "),cons[,11:12])
+BD=rbind(Dig,Bib)
+TT=rbind(Dig,Bib)
+TTNtax=subset(TT,Genus=="Plantae" | Genus=="Fungi" | Genus=="Bacteria" | Genus=="Protozoa" | Genus=="Nematoda" | Genus=="Larve" | Genus=="Algae" | Genus=="Detritus")
+TTNtax$Genus
+TTtax=subset(TT,Genus!="Plantae" & Genus!="Fungi" & Genus!="Bacteria" & Genus!="Protozoa" & Genus!="Nematoda" & Genus!="Larve" & Genus!="Algae" & Genus!="Detritus")
+TTtax$Genus
+TTNtax=subset(TT,Genus=="Plantae" | Genus=="Fungi" | Genus=="Bacteria" | Genus=="Protozoa" | Genus=="Nematoda" | Genus=="Larve" | Genus=="Algae" | Genus=="Detritus"  | Genus=="Yeast")#
+	TTtax=subset(TT,Genus!="Plantae" & Genus!="Fungi" & Genus!="Bacteria" & Genus!="Protozoa" & Genus!="Nematoda" & Genus!="Larve" & Genus!="Algae" & Genus!="Detritus" & Genus!="Yeast")
+h=get_boldid(TTtax$Genus)
+Dig=data.frame(data$consDig)	#
+	BibR=data.frame(data$ressBib)#
+	BibC=data.frame(data$consBib)
+head(Dig)
+consB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/consBib.csv')#
+ressB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/ressBib.csv')#
+interB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/interBib.csv',sep=',')#
+consD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/conso.csv')#
+ressD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/resso.csv')#
+interD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/interac.csv')
+head(consB)
+head(ressB)
+head(consD)
+head(ressD)
+consB=consB[,c(1,2,7:17)]#
+ressB=ressB[,c(1,2,7:13)]#
+consD=consD[,c(1:11,16,17)]#
+ressD=ressD[,c(1:7,12,13)]#
+interD=interD[,c(4,6,7,5)]#
+data=list(consD,ressD,interD,consB,ressB,interB)
+names(data)=c('consDig','ressDig','interDig','consBib','ressBib','interBib')
+save(data,file='~/Documents/Ecole/These/PkgFW/data/data.RData')
+Dig=data.frame(data$consDig)	#
+	BibR=data.frame(data$ressBib)#
+	BibC=data.frame(data$consBib)
+head(Dig)
+head(Bib)
+head(BibR)
+Bib=rbind(BibR[,c(1:4)],BibC[,c(1:4)])
+colnames(Bib)=colnames(Dig)
+head(Bib)
+head(Dig)
+Dig=data.frame(Num=paste(Dig$X,"DIG",sep=" "),cons[,11:13])
+Dig=data.frame(Num=paste(Dig$X,"DIG",sep=" "),Dig[,11:13])
+colnames(Bib)=colnames(Dig)
+TT=rbind(Dig,Bib)
+head(TT)
+TTNtax=subset(TT,Genus=="Plantae" | Genus=="Fungi" | Genus=="Bacteria" | Genus=="Protozoa" | Genus=="Nematoda" | Genus=="Larve" | Genus=="Algae" | Genus=="Detritus"  | Genus=="Yeast" |  Genus=="lichen")#
+	TTtax=subset(TT,Genus!="Plantae" & Genus!="Fungi" & Genus!="Bacteria" & Genus!="Protozoa" & Genus!="Nematoda" & Genus!="Larve" & Genus!="Algae" & Genus!="Detritus" & Genus!="Yeast" & Genus!="lichen")
+unique(TT$Kingdom)
+head(Dig)
+head(Bib)
+head(BibR)
+head(BibC)
+Bib=rbind(BibR[,c(1,3,2,4)],BibC[,c(1,3,2,4)])#
+	colnames(Bib)=colnames(Dig)#
+	TT=rbind(Dig,Bib)#
+	TTNtax=subset(TT,Genus=="Plantae" | Genus=="Fungi" | Genus=="Bacteria" | Genus=="Protozoa" | Genus=="Nematoda" | Genus=="Larve" | Genus=="Algae" | Genus=="Detritus"  | Genus=="Yeast" |  Genus=="lichen")#
+	TTtax=subset(TT,Genus!="Plantae" & Genus!="Fungi" & Genus!="Bacteria" & Genus!="Protozoa" & Genus!="Nematoda" & Genus!="Larve" & Genus!="Algae" & Genus!="Detritus" & Genus!="Yeast" & Genus!="lichen")
+unique(TTtax$Kingdom)
+TTtax=droplevels(TTtax)
+unique(TTtax$Kingdom)
+subset(TTtax,Kingdom=='Lichen')
+subset(TTtax,Kingdom=='Protozoa')
+subset(TTtax,Kingdom=='Bacteria')
+IdA=subset(TTtax,Kingdom=='Animalia')#
+	IdF=subset(TTtax,Kingdom=='Fungi')#
+	IdP=subset(TTtax,Kingdom=='Plantae')#
+	IdR=subset(TTtax,Kingdom=='Protozoa' | Kingdom=='Bacteria')
+IdF=get_boldid(TTtaxP$Genus, division = "Fungi")
+TTtaxA=subset(TTtax,Kingdom=='Animalia')#
+	TTtaxF=subset(TTtax,Kingdom=='Fungi')#
+	TTtaxP=subset(TTtax,Kingdom=='Plantae')#
+	TTtaxR=subset(TTtax,Kingdom=='Protozoa' | Kingdom=='Bacteria')
+IdF=get_boldid(TTtaxF$Genus, division = "Fungi")
+IdP=get_boldid(TTtaxP$Genus, division = "Plants")
+consB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/consBib.csv')#
+ressB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/ressBib.csv')#
+interB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/interBib.csv',sep=',')#
+consD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/conso.csv')#
+ressD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/resso.csv')#
+interD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/interac.csv')#
+consB=consB[,c(1,2,7:17)]#
+ressB=ressB[,c(1,2,7:13)]#
+consD=consD[,c(1:11,16,17)]#
+ressD=ressD[,c(1:7,12,13)]#
+interD=interD[,c(4,6,7,5)]#
+data=list(consD,ressD,interD,consB,ressB,interB)#
+#
+names(data)=c('consDig','ressDig','interDig','consBib','ressBib','interBib')#
+save(data,file='~/Documents/Ecole/These/PkgFW/data/data.RData')
+ressB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/ressBib.csv')
+ressB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/ressBib.csv',sep=',')
+ressBib
+ressB
+ressB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/ressBib.csv',sep=' ')
+ressB
+ressB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/ressBib.csv',sep="\t")
+ressB
+ressB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/ressBib.csv')
+ressB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/ressBib.csv',sep=",")
+head(ressB)
+ressB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/ressBib.csv',sep=";")
+head(ressB)
+unique(ressB$V7)
+levels(ressB$V7)
+consB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/consBib.csv')#
+ressB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/ressBib.csv',sep=";",head=TRUE)#
+interB=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Bib/interBib.csv',sep=',')#
+consD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/conso.csv')#
+ressD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/resso.csv')#
+interD=read.table('~/Documents/Ecole/These/BdDInterac/DataFinal/Dig/interac.csv')#
+consB=consB[,c(1,2,7:17)]#
+ressB=ressB[,c(1,2,7:13)]#
+consD=consD[,c(1:11,16,17)]#
+ressD=ressD[,c(1:7,12,13)]#
+interD=interD[,c(4,6,7,5)]#
+data=list(consD,ressD,interD,consB,ressB,interB)#
+#
+names(data)=c('consDig','ressDig','interDig','consBib','ressBib','interBib')#
+save(data,file='~/Documents/Ecole/These/PkgFW/data/data.RData')
+Dig=data.frame(data$consDig)	#
+	BibR=data.frame(data$ressBib)#
+	BibC=data.frame(data$consBib)#
+	Dig=data.frame(Num=paste(Dig$X,"DIG",sep=" "),Dig[,11:13])#
+	Bib=rbind(BibR[,c(1,3,2,4)],BibC[,c(1,3,2,4)])#
+	colnames(Bib)=colnames(Dig)#
+	TT=rbind(Dig,Bib)#
+	TTNtax=subset(TT,Genus=="Plantae" | Genus=="Fungi" | Genus=="Bacteria" | Genus=="Protozoa" | Genus=="Nematoda" | Genus=="Larve" | Genus=="Algae" | Genus=="Detritus"  | Genus=="Yeast" |  Genus=="lichen" | Genus=="Lichen")#
+	TTtax=subset(TT,Genus!="Plantae" & Genus!="Fungi" & Genus!="Bacteria" & Genus!="Protozoa" & Genus!="Nematoda" & Genus!="Larve" & Genus!="Algae" & Genus!="Detritus" & Genus!="Yeast" & Genus!="lichen" & Genus!="Lichen")
+TTtaxR=subset(TTtax,Kingdom=='Protozoa' | Kingdom=='Bacteria')
+TTtaxP=subset(TTtax,Kingdom=='Plantae')
+TTtaxF=subset(TTtax,Kingdom=='Fungi')
+TTtaxA=subset(TTtax,Kingdom=='Animalia')
+IdR=get_boldid(TTtaxR$Genus)
+IdP=get_boldid(TTtaxP$Genus, division = "Plants")
+IdF=get_boldid(TTtaxF$Genus, division = "Fungi")
+IdP=get_boldid(TTtaxP$Genus, division = "Plants")
+IdR=get_boldid(TTtaxR$Genus)
+IdA=get_boldid(TTtaxA$Genus, division = "Animals")
+p=cbind(classification(IdA),classification(IdF),classification(IdP),classification(IdR))
+pR=cbind(classification(IdR))
+classification(IdR)
+IdR
+pP=cbind(classification(IdP))
+pF=cbind(classification(IdF))
+subset(IdR,which(is.na(IdR)))
+str(IdR)
+!is.na(IdR)
+IdR[1]
+IdR[2]
+IdR[3]
+IdR[which(!is.na(IdR))]
+NAS=TTtaxA[which(is.na(IdA)),]
+NAS
+IncA=rbind(TTtaxA[which(is.na(IdA)),],TTtaxF[which(is.na(IdF)),],TTtaxP[which(is.na(IdP)),],TTtaxR[which(is.na(IdR)),])
+IncA
+nrow(IncA)
+nrow(TTtax)
+Lettres=c("E","Z","F","C","D")#
+n=length(Lettres)#
+for(i in 1:n-1){#
+  for(j in 2:n){#
+    if(Lettres[j-1]>Lettres[j]){#
+     temporaire=Lettres[j-1]#
+     Lettres[j-1]=Lettres[j]#
+     Lettres[j]=temporaire#
+    }#
+  }#
+}#
+Lettres
+alpha <- c("E","Z","F","C","D")alpha#Création d’une boucle while avec la condition d’arrêter si les lettres sont en ordre l’alphabétique. while(alpha[1]> alpha[2] | alpha[2]>alpha[3] | alpha[3]> alpha[4] | alpha[4]> alpha[5]){for (i in 1:4){               #Boucle FOR pour le changement de position des lettres. if (alpha[i+1] < alpha[i]){	temp<- alpha[i]	alpha[i] <- alpha[i+1]	alpha[i+1] <- temp		}}}alpha
+lettres <- c("E", "Z", "F", "C", "D")#
+for(i in 1:4){#
+  x=1#
+    while( x < 6 - i) {#
+      if(lettres[x] > lettres[x+i]){#
+        var1 = lettres[x]#
+        var2 = lettres[x+i]#
+        lettres[x+i] = var1#
+        lettres[x] = var2#
+        x=x+1#
+      }#
+        else{#
+          x=x+1#
+        }#
+    }#
+}#
+lettres
+Lettres <- c("E","Z","F","C","D")#
+  # Créer la variable echange et lui donner une valeur pour entrer dans la boucle WHILE#
+  echange = FALSE#
+  # Tant que la variable echange égale FALSE, la boucle WHILE va s'effectuer#
+  while(echange == FALSE) #
+  {#
+    # Créer la variable n pour indiquer la position dans le vecteur Lettres#
+    n = 1#
+    # Créer la variable changement pour vérifier s'il y a eu un changement de position dans le vecteur Lettres#
+    changement = FALSE#
+    # Effectuer la boucle FOR pour les positions 1 à 4 du vecteur Lettres#
+    for(n in 1:4) #
+    {#
+      # Créer les objets var1 et var2#
+      var1 = 0#
+      var2 = 0#
+      if(Lettres[n + 1] < Lettres[n])#
+      {#
+        # Placer la lettre à la position n du vecteur Lettres dans l'objet var1#
+        var1 <- Lettres[n] #
+        # Placer la lettre à la position n+1 du vecteur Lettres dans l'objet var2#
+        var2 <- Lettres[n + 1]#
+        # Échanger de place var1 et var2#
+        Lettres[n + 1] <- var1#
+        Lettres[n] <- var2#
+        # Changer la valeur de la variable changement puisqu'il y a eu un changement de positions dans le vecteur Lettres#
+        changement <- TRUE#
+        print(Lettres)#
+      }#
+        if(changement == TRUE)#
+        {#
+          # Redonner la valeur FALSE à la variable changement pour entrer à nouveau dans la boucle FOR#
+          changement = FALSE#
+        }#
+        # Si tous les changements de positions dans le vecteur Lettres ont été effectués, la variable changement n'égalera plus TRUE#
+        else(changement != TRUE)#
+        {#
+          # Changer la valeur de la variable echange empêche de recommencer la boucle WHILE.#
+          # Le programme devrait arrêter, mais tourne à l'infini...#
+          echange == TRUE  #
+        }#
+    }#
+  }
+lettres <- c("E","Z","F","C","D") #
+#NoChange est la variable utilisée pour la condition de la boucle while#
+NoChange = 1#
+while(NoChange == 1)#
+{ #
+  #le flag sert de repère pour savoir si la lettre à la position regardée a changer de place#
+  flag = 0#
+  i = 0#
+  for(i in 1:4)#
+  {#
+    #var1 sera utilisé afin de faire le déplacement des lettres dans le vecteur#
+    var1 <- 1#
+    if(lettres[i] > lettres[i+1])#
+    {#
+      var1 <- lettres[i+1]#
+      lettres[i+1] <- lettres[i]#
+      lettres[i] <- var1#
+      #en changeant la valeur de flag, on peut suivre s'il y a eu un changement de place et poursuivre la boucle jusqu'à ce qu'iln'y est plus rien qui bouge#
+      flag <- 1#
+      print(lettres)#
+    }#
+  }#
+  #les conditions ci-bas servent à poursuivre ou arrêter la boucle while#
+  if (flag == 1)#
+  {#
+    #le «reset» de flag permet de recommencer la boucle et de suivre un chngement de place par l'augmentation de valeur de flag#
+    flag = 0#
+  }#
+  else (flag != 1)#
+  {#
+    #en changeant la valeur de NoChange, on rend la condition de la boucle while fausse, donc on arrête#
+    NoChange == 2#
+  }#
+}
+vecteur <- c("E", "Z", "F", "C", "D")  #Établir le vecteur#
+ordre <- FALSE                         #Assigner l'objet "ordre" à la fonction FALSE#
+while(ordre == FALSE){                 #Exécuter la boucle tant que l'ordre est FALSE#
+  ordre = TRUE                         #Tester si tout est dans l'ordre: tester si le "if" est rencontré. Si c'est le cas, l'ordre n'est plus FALSE, alors la boucle while ne se poursuit plus#
+  for(pos in 1:4){                     #Boucle qui comparera les 4 paires possibles du vecteur de 5 lettres#
+    if(vecteur[pos] > vecteur[pos+1]){ #Si la première itération "pos" du vecteur "vecteur" est plus grande que l'itération suivante "pos+1",#
+      vecteur[c(pos, pos+1)] = vecteur[c(pos+1, pos)] #inverser les deux lettres#
+      ordre = FALSE                    #Puisqu'il est possible que le vecteur ne soit pas encore en ordre, on lui spécifie qu'il n'est toujours pas dans l'ordre pour qu'il retourne au début de la boucle et qu'il refasse le test#
+    }#
+  }#
+  print(vecteur)                       #À l'extérieur de la boucle for, imprimer le vecteur lorsqu'il est en ordre et que la condition "if" n'est plus rencontrée#
+}
+lettres <- c("E","Z","F","C","D")#
+for(c in 1:4){#
+  i=1#
+  while(i < 6-c){#
+    if(lettres[c+i] < lettres[c]){#
+      var1 = lettres[c]#
+      var2 = lettres[c+i]#
+      lettres[c] = var2#
+      lettres[c+i] = var1#
+      i=i+1#
+    }#
+    else{#
+      i=i+1#
+    }#
+  }#
+}#
+lettres
+X<-c("E","Z","F","C","D")#
+while(X[1]>X[2] | X[2]>X[3] | X[3]>X[4] | X[4]>X[5]){#
+  for(i in 1:4){#
+    if(X[i]>X[i+1]){#
+      temp<-X[i]#
+      X[i]<-X[i+1]#
+      X[i+1]<-temp#
+    }#
+  }#
+}#
+X
+#Programme de classification des lettres#
+lettres<- c("E","Z","F","C","D")# Représente chaque lettre pigée#
+#Comparaison de chaque position l'une après l'autre jusqu'à une suite idéale#
+while(lettres[1]>lettres[2]| lettres[2]>lettres[3]| lettres[3]>lettres[4]|lettres[4]>lettres[5]){#
+  for(i in 1:4) {#
+    #Si une lettre est plus grande que celle d'après on l'inverse#
+    if (lettres[i]>lettres[i+1]){#
+      var1<-lettres[i]#
+      var2<-lettres[i+1]#
+      lettres[i] <- var2#
+      lettres[i+1]<- var1}#
+  }#
+} #
+lettres #réponse finale
+#vecteur contenant les lettres pigÈes#
+lettre <- c("E","Z","F","C","D")#
+#Tant qu'une lettre est plus grande qu'une suivante dans l'ordre du vecteur, on continue l'opÈration#
+while (lettre[1]>lettre[2] | lettre[2]>lettre[3] | lettre[3]>lettre[4] | lettre[4]>lettre[5]){#
+  for (i in 1:4) {#
+    if (lettre[i]>lettre[i+1]) #
+      #Si une lettre une plus grande que la suivante dans l'ordre du vecteur, on les inverse#
+      {var1 <- lettre[i]#
+       var2 <- lettre[i+1]#
+       lettre[i] <- var2#
+       lettre[i+1] <- var1} #
+  }#
+}
+lettres
+X =c("E", "Z", "F", "C", "D") #
+for(y in 1:4)#
+for(i in 1:4){#
+  if(X[i] > X[i+1]){#
+    tempo = X[i]#
+    X[i] = X[i+1]#
+    X[i+1] = tempo#
+     }#
+}#
+X
+lettres = c("E","Z","F","C","D")#
+for(boucle in 1:4) {#
+  for(t in 1:4)  #
+    if(lettres[t]>lettres[t+1]){#
+      var1= lettres[t]#
+      var2= lettres[t+1]#
+      lettres[t+1]=var1#
+      lettres[t]=var2#
+    print(lettres)#
+    }#
+}
+Lettres <- c("E","Z","F","C","D")#
+  # Créer la variable echange et lui donner une valeur pour entrer dans la boucle WHILE#
+  echange = FALSE#
+  # Tant que la variable echange égale FALSE, la boucle WHILE va s'effectuer#
+  while(echange == FALSE) #
+  {#
+    # Créer la variable n pour indiquer la position dans le vecteur Lettres#
+    n = 1#
+    # Créer la variable changement pour vérifier s'il y a eu un changement de position dans le vecteur Lettres#
+    changement = FALSE#
+    # Effectuer la boucle FOR pour les positions 1 à 4 du vecteur Lettres#
+    for(n in 1:4) #
+    {#
+      # Créer les objets var1 et var2#
+      var1 = 0#
+      var2 = 0#
+      if(Lettres[n + 1] < Lettres[n])#
+      {#
+        # Placer la lettre à la position n du vecteur Lettres dans l'objet var1#
+        var1 <- Lettres[n] #
+        # Placer la lettre à la position n+1 du vecteur Lettres dans l'objet var2#
+        var2 <- Lettres[n + 1]#
+        # Échanger de place var1 et var2#
+        Lettres[n + 1] <- var1#
+        Lettres[n] <- var2#
+        # Changer la valeur de la variable changement puisqu'il y a eu un changement de positions dans le vecteur Lettres#
+        changement <- TRUE#
+        print(Lettres)#
+      }#
+        if(changement == TRUE)#
+        {#
+          # Redonner la valeur FALSE à la variable changement pour entrer à nouveau dans la boucle FOR#
+          changement = FALSE#
+        }#
+        # Si tous les changements de positions dans le vecteur Lettres ont été effectués, la variable changement n'égalera plus TRUE#
+        else(changement != TRUE)#
+        {#
+          # Changer la valeur de la variable echange empêche de recommencer la boucle WHILE.#
+          # Le programme devrait arrêter, mais tourne à l'infini...#
+          echange == TRUE  #
+        }#
+    }#
+  }
+x <- c("e","z","f","c","d") combinaison <- c("z","e","f","c","d") while(combinaison!=sort(combinaison) {        toto<-sample(x,5)        combinaison<- paste(toto)        print(combinaison)         }
+lettres=c("E","Z","F","C","D")Fonction=function(x) 	{	for (i in 1:5)		{		if (lettres[i]>lettres[i+1])			{			var1=lettres[i]			var2=lettres[i+1]			lettres[i]=var2			lettres[i+1]=var1			}		}	}  if (lettres[1]<lettres[2]&lettres[2]<lettres[3]&lettres[3]<lettres[4]&lettres[4]<lettres[5]) 	{	break	}else	{	continue	}
+Letters=c("E", "Z", "F", "C", "D")Var1=Letters[1]Var2=Letters[2]Var3=Letters[3]Var4=Letters[4]Var5=Letters[5]#Créer une fonction pour trier les lettres dans l’ordre croissantfonction=function(x)for (i in 1:5) { if(Letters[i]>Letters[i+1]) {var1=Letters[i+1] var2=Letters[i]}else {continue} if(Letters[1]<Letters[2]&Letters[2]<Letters[3]&Letters[3]<Letters[4]&Letters[4]<Letters[5]) {break}}fonction(Letters)
+n=1while (vecteur[1]>vecteur[2]|vecteur[2]>vecteur[3]|vecteur[3]>vecteur[4]|vecteur[4]>vecteur[5]){  if(vecteur[1]<=vecteur[2]&vecteur[2]<=vecteur[3]&vecteur[3]<=vecteur[4]&vecteur[4]<=vecteur[5]){    print(vecteur)}  else {    copie<-vecteur[n]    vecteur[n]<-vecteur[n+1]    vecteur[n+1]<-copie    n<-n+1  }}
+vecteur
+lettres = c('E','Z','F','C','D')#
+for(boucle in 1:4) {#
+  for(x in 1:4) {#
+    if(lettres[x] > lettres[x+1]) {#
+    Var1=lettres[x]#
+    Var2=lettres[x+1]#
+    lettres[x]=Var2#
+    lettres[x+1]=Var1#
+    print(lettres)#
+  }#
+}#
+}
+lettres = c('E', 'Z', 'F', 'C', 'D')#
+for(x in 1:4) {#
+  for(t in 1:4) {#
+    if(lettres[t]>lettres[t+1]) {#
+      Var1 <- lettres[t]#
+      Var2 <- lettres[1+t]#
+      lettres[t] <- Var2#
+      lettres[t+1] <- Var1#
+print(lettres)#
+    }#
+  }#
+}
+lettres = c("E", "Z", "F", "C", "D")#
+for(x in 1:4) {#
+  for(t in 1:4) {#
+    if(lettres[t] > lettres[t+1]) {#
+      var1 = lettres[t]#
+      var2 = lettres[t+1]#
+      lettres[t] = var2#
+      lettres[t+1] = var1#
+print(lettres)#
+    }#
+  }#
+}
+x <- c("E","Z","F","C","D")#
+for (i in 1:4) {#
+  if(x[i] < x[i+1]) {#
+    print (x[i])#
+  }#
+  else if (x[i] > x[i+1]) {#
+    next[i]#
+  }#
+}
+lettre= c("e","z","f","c","d")#
+for (x in 1 :4) {#
+  for(t in 1:4){#
+    if(lettre[t]>lettre[t+1]){#
+      var1=lettre[t]#
+      var2=lettre[t+1]#
+      lettre[t]=var2#
+      lettre[t+1]=var1#
+    }#
+  }#
+} #
+lettre
+scrabble=c("E","Z","F","C","D")#
+NoChange = 1 #créer la varible et permet de rentrer dan ta boucle while#
+while(NoChange==1) #tant que NoChange =1 la boucle while continue. Elle va arreter lorsque la condition ne sera plus vrai#
+{#
+  flag =0 #créer une variable flag et donne une valeur 0 #
+  i=0 #créer la variable i ce qui va donner la position dans l'objet scrabble#
+  for(i in 1:4) #
+  {#
+    var1=0 #créer une variable var1 ce qui va permettre de plus tard de changer le contenu de la variable#
+    if(scrabble[i] > scrabble[i+1]) #
+    {#
+      var1<-scrabble[i+1] #mettre la valeur de scrabble[i+1] (donc la lettre) dans l'objet var1#
+      scrabble[i+1]<-scrabble[i] #
+      scrabble[i]<-var1#
+      flag <-1 #la valeur de flag change lorsqu'il y a eu changement dans lordre des lettres#
+      print(scrabble)#
+    }#
+  }#
+  if(flag==1) #si flag =1 ca veut dire que les lettres on changé donc repartir la boucle#
+  {#
+    flag=0#
+  }#
+  else(flag!=1) #si flag !=1 ca veut dire qu'il n'y a plus de changement dans les lettres et donc qu'ils sont dans le bonne ordre#
+  {#
+    NoChange == 2#
+  }#
+} #
+#pour
+11*28
+18*12
+qcbs_r_registration <- function(workshop=NULL,location=NULL,cancel=NULL,noshow=NULL,reregister=NULL)#
+  # Get list of registrants for QCBS R workshop series#
+  ##
+  # Parameters:#
+  ##
+  # workshop = workshop number (e.g. 6), from 1-8#
+  ##
+  # location = Shortname for workshop location. One of "McGill", "UdeM", "Sherbrooke", "Laval", "UQAR", "UQAM", "Concordia".#
+  ##
+  # cancel, noshow, reregister= specify registration id to cancel a registration (cancel), indicate a person who didn't cancel#
+  #                             and didn't attend (noshow), or someone who cancelled and then decided to re-register (reregister)#
+  #                             for example: cancel=51 will cancel registration id 51. To obtain the id of a specific registration,#
+  #                             run the function with the workshop id and location name and look at the registration_id column.#
+  ##
+  # Output:#
+  # Data frame with list of participants, or message if cancel, noshow or reregister where specified.#
+  ##
+  # Author:: Guillaume Larocque, 2015 (glaroc@gmail.com)#
+  {#
+    if(!is.null(cancel) | !is.null(noshow) | !is.null(reregister)){#
+      if(!is.null(cancel)){#
+        cancelnoshow=1#
+        regid=cancel#
+        status="cancel"#
+      }else if(!is.null(noshow)){#
+        cancelnoshow=2#
+        regid=noshow#
+        status="no_show"#
+      }else if(!is.null(reregister)){#
+        cancelnoshow="rereg"#
+        regid=reregister#
+        status="registered/present"#
+      }#
+      file<-postForm('http://qcbs.ca/qcbs-database/r-registration-csv.php',cancelnoshow=cancelnoshow,regid=regid,key='9HJS975LKM4FPST48SNMLE12l')#
+      print(paste('Registration ',regid,' changed to: ',status,sep=""))#
+    }else{#
+      file<-postForm('http://qcbs.ca/qcbs-database/r-registration-csv.php',workshop=workshop,location=location,key='9HJS975LKM4FPST48SNMLE12l')#
+      read.csv(textConnection(file))#
+    }#
+}#
+#Examples#
+#
+install.packages("RCurl")#
+library(RCurl)#
+class_list <- qcbs_r_registration(workshop=1,location="UdeM")#
+write.csv(class_list,'list.csv')#
+#
+#say student number ABC123 did not show up at workshop 1 at UdeM#
+# (fictive student number so that we do not change the status #
+# of an actual student just to test the script):#
+#
+qcbs_r_registration(noshow=ABC123)#
+#you get error message because this student number does not exist. But you get the point...
+getwd()
+class_list <- qcbs_r_registration(workshop=10,location="UdS")
+?qcbs_r_registration
+class_list <- qcbs_r_registration(workshop=10,location="Sherbrooke")
+class_list
+write.csv(class_list,'list.csv')
+?rdist
+library(fields)
+install.packages(fields)
+install.packages("fields")
+library(fields)
+library(ade4)
+?dist.taxo
+dist.taxo
+load("/Users/idaline/Documents/Ecole/These/SFW/data/taxoAll.RData")
+TTNew=taxT
+tax=as.taxo(TTNew)
+summary(TTNew)
+taxT$Family=as.factor(tax$Family)
+taxT$Family=as.factor(taxT$Family)
+taxT$Order=as.factor(taxT$Order)
+taxT$Class=as.factor(taxT$Class)
+save(taxT,file="/Users/idaline/Documents/Ecole/These/SFW/data/taxoAll.RData")
+TTNew=taxT
+tax=as.taxo(TTNew)
+TTNew=droplevels(TTNew)
+tax=as.taxo(TTNew)
+head(tax)
+t=dist.taxo(tax)
+t
+dist.taxo
+g=c(1,1,2,3)
+acm.disjonctif(g)
+g
+acm.disjonctif(as.data.frame(g))
+setwd("~/Documents/Ecole/These/SFW")
+library(devtools)
+devtools::document()
+load("/Users/idaline/Documents/Ecole/These/SFW/data/pcoaTax.RData")
+load("/Users/idaline/Documents/Ecole/These/SFW/data/rfC.RData")
+load("/Users/idaline/Documents/Ecole/These/SFW/data/taxoAll.RData")
+load("/Users/idaline/Desktop/sauvPkg/data.RData")
+load("/Users/idaline/Desktop/sauvPkg/taxoAll.RData")
+load("/Users/idaline/Documents/Ecole/These/SFW/data/taxoAll.RData")
+ls()
+devtools::use_data(data)
+devtools::use_data(pcoaTax)
+devtools::use_data(rfC_sv)
+devtools::use_data(taxT)

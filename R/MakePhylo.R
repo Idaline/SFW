@@ -22,10 +22,19 @@ NewTax=data.frame(Genus=NewTaxo$Genus,Family=NewTaxo$Family,Order=NewTaxo$Order,
 		TTNew=droplevels(TTNew)
 		tax=as.taxo(TTNew)
 		t=dist.taxo(tax)
-		#Fixer les nouvelles distances sur lancienne Pcoa sauvée
-		axes=data.frame(Pcoa2$l1)
-		axesN=axes[which(!is.na(match(row.names(axes),row.names(NewTax)))),]
+		pcoa2=dudi.pco(t,scannf=FALSE,nf=2)
+		axes=data.frame(pcoa2$l1)
 		axesO=axes[which(is.na(match(row.names(axes),row.names(NewTax)))),]
+		
+		axes1=data.frame(pcoaTax$l1)
+		proc <- procrustes(axes1,axesO, nf = 2)
+		axes2=axes%*%proc$rotation*proc$scale
+		axes2[,1]=axes2[,1]+proc$rot[,1]
+		axes2[,2]=axes2[,2]+proc$rot[,2]
+		
+		axesN=axes2[which(!is.na(match(row.names(axes2),row.names(NewTax)))),]
+		axesO=axes2[which(is.na(match(row.names(axes2),row.names(NewTax)))),]
+		
 		axes=list(axesN,axesO)
 		names(axes)=c('YourData','ParamData')
 		
@@ -112,8 +121,8 @@ TTNtax2=data.frame(Genus=TTNtax$Genus,Family=TTNtax$Genus,Order=TTNtax$Genus,Cla
 	tax=as.taxo(TT3)
 	t=dist.taxo(tax)
 	
-	Pcoa2=dudi.pco(t,scannf=FALSE,nf=2)
-	axes=data.frame(Pcoa2$l1)
+	pcoaTax=dudi.pco(t,scannf=FALSE,nf=2)
+	axes=data.frame(pcoaTax$l1)
 	axesN=axes[which(!is.na(match(row.names(axes),row.names(NewTax)))),]
 	axesO=axes[which(is.na(match(row.names(axes),row.names(NewTax)))),]
 	axes=list(axesN,axesO)
