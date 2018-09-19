@@ -489,7 +489,7 @@ void Communities :: operator()( state_type &x , const double t)//Ordre changee
         }
         out << endl;
     }
-    if (m_timer==(m_Tf/m_Tp))
+    if (m_timer==(m_Tf/ m_Tp))
     {
         m_timer=0;
     }

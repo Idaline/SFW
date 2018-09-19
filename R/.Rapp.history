@@ -142,3 +142,10 @@ t
 dudi.pco
 procrustes
 procruste
+vecArg=matrix(NA,6,2)
+vecArg[,1]=c('Tf','Tp','Nin','Nout','DetIn','CNDetIn')
+vecArg[,2]=vArg
+vArg=c(1,0.01,0.5,0.2,0.1,26)
+vecArg[,2]=vArg
+getwd()
+write.table(vecArg,file='vecArg.txt',row.names=FALSE,col.names=FALSE, quote = FALSE)

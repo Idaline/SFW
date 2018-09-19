@@ -1,5 +1,9 @@
 # SFW
-R package for modeling soil food web dynamics and predicting species interactions from their traits
+R package for modeling soil food web dynamics and predicting species interactions from their traits. \\
+More information about the model that predicts the interactions available on : \\
+Laigle, I., Aubin, I., Digel, C., Brose, U., Boulangeat, I., & Gravel, D. (2018). Species traits as drivers of food web structure. Oikos, 127(2), 316-326. \\
+and about the model that predicts population dynamics : \\
+Laigle, I., Aubin, I., & Gravel, D. (2018). Species traits and community properties explain species extinction effects on detritus-based food webs. arXiv preprint arXiv:1809.03614.
 
 ## MakePhylo
 
