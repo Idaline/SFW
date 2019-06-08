@@ -2,7 +2,6 @@
 //  main.cpp
 //  FW
 //
-//  Created by Idaline Laigle and Eric Giguere.
 //  Copyright (c) 2014 Idaline Laigle. All rights reserved.
 //
 
@@ -30,8 +29,8 @@ using namespace boost::numeric::odeint;
 
 
 Communities::Communities (vector<Consumer> &Consumer, vector<Detritus> &Detritus, vector<Producer> &Producer, vector<Microbes> &Microbes,
-    int nbcons, int nbdet, int nbprod, int nbmic, state_type &B, state_type &Btemp, int timer, double Nin, double Nout, double DetIn, double CNDetIn, double Tf, double Tp) : m_Consumer(Consumer),
-m_Detritus(Detritus), m_Producer(Producer), m_Microbes(Microbes), m_nbcons(nbcons), m_nbdet(nbdet), m_nbprod(nbprod), m_nbmic(nbmic), B(B), m_Btemp(Btemp), m_timer(timer), m_Nin(Nin), m_Nout(Nout), m_DetIn(DetIn), m_CNDetIn(CNDetIn), m_Tf(Tf), m_Tp(Tp)
+    int nbcons, int nbdet, int nbprod, int nbmic, state_type &B, state_type &Btemp, int timer) : m_Consumer(Consumer),
+m_Detritus(Detritus), m_Producer(Producer), m_Microbes(Microbes), m_nbcons(nbcons), m_nbdet(nbdet), m_nbprod(nbprod), m_nbmic(nbmic), B(B), m_Btemp(Btemp), m_timer(timer)
 {
     m_nbtot = m_nbcons+m_nbdet+m_nbprod+m_nbmic+1;
 }
@@ -87,6 +86,7 @@ void Communities :: operator ()( state_type &x , state_type &dxdt , double t)
     int num10;
     int numR;
     int num35;
+    int num20;
 
     for (int itD=0; itD<m_nbdet; ++itD)
     {
@@ -101,6 +101,10 @@ void Communities :: operator ()( state_type &x , state_type &dxdt , double t)
         if (m_Detritus[itD].getName()=="Det35")
         {
             num35 = itD+1+m_nbcons+m_nbprod;
+        }
+        if (m_Detritus[itD].getName()=="Det20")
+        {
+            num20 = itD+1+m_nbcons+m_nbprod;
         }
     }
 
@@ -167,21 +171,17 @@ void Communities :: operator ()( state_type &x , state_type &dxdt , double t)
 
         dxdt[p] -= leaching;
         dxdt[m_nbtot+itD]-=leaching;
-        dxdt[m_nbtot+itD+5]-=leaching/(1/m_Detritus[itD].getNC());
+        dxdt[m_nbtot+itD+5]-=leaching/(1/m_Detritus[itD].getNC()); 
     }
 
-// Litter input from trees
+        //On est en forêt de Fagus, donc y'a un apport de litière  de CN=19, Pin = 34. Simu RichLit, CN=10, PoorLit,CN=34
 
-    for (int itD=0; itD<m_nbdet; ++itD)
-    {
-        int Cond=m_Detritus[itD].SetClassDet(m_CNDetIn);
-        if (Cond==1)
-        {
-            dxdt[m_nbcons+m_nbprod+1+itD] +=m_DetIn;
-            dxdt[m_nbtot+itD]+=m_DetIn;
-            dxdt[m_nbtot+itD+5]+=m_DetIn/m_CNDetIn;
-        }
-    }
+      int fall=20;
+      int numDet=num35;
+      int LitCN=34;
+      dxdt[numDet] +=fall;
+      dxdt[m_nbmic+m_nbdet+numDet]+=fall;
+      dxdt[m_nbmic+m_nbdet+numDet+5]+=fall/LitCN;
 
 
 //Producer
@@ -198,7 +198,6 @@ void Communities :: operator ()( state_type &x , state_type &dxdt , double t)
         {
             dxdt[i] = m_Btemp[i] * r * G;
             dxdt[NiNum] -=  (r * G * m_Btemp[i])*m_Producer[itP].getNC();
-            //cout << m_Producer[itP].getName() << "\t" << (r * G * m_Btemp[i])*m_Producer[itP].getNC() << endl;
         }
 
     //Litter production
@@ -229,6 +228,7 @@ void Communities :: operator ()( state_type &x , state_type &dxdt , double t)
         int i = m_nbcons+m_nbprod+m_nbdet+1+itM;
         double Ccons=0;
         double Ncons=0;
+        double CEgest=0;
         double CNmic=1/m_Microbes[itM].getNC();
         for (int itD=0; itD<m_nbdet; ++itD)
         {
@@ -263,8 +263,37 @@ void Communities :: operator ()( state_type &x , state_type &dxdt , double t)
         {
             if (x[NiNum]>(Ccons/CNmic - Ncons))
             {
-                dxdt[NiNum]-= Ccons/CNmic - Ncons;
-                if ((Ccons/CNmic - Ncons)<0)
+                double absN=m_Microbes[itM].getNabs()*Ccons/CNmic - Ncons;
+                Ncons+= absN;
+                dxdt[NiNum]-= absN;
+                CEgest=Ccons-(Ncons*CNmic);
+                if ((Ccons-(Ncons*CNmic))<0)
+                {
+                    cout << "HALT5" << endl;
+                    return;
+                }
+                Ccons-=CEgest;
+
+                if ((Ccons/CNmic - Ncons)<(-0.01))
+                {
+                    cout << "HALT4" << endl;
+                    return;
+                }
+            }
+            else if (x[NiNum]<=(Ccons/CNmic - Ncons))
+            {
+                double absN=x[NiNum];
+                Ncons+= absN;
+                dxdt[NiNum]-= absN;
+                CEgest=Ccons-(Ncons*CNmic);
+                if ((Ccons-(Ncons*CNmic))<0)
+                {
+                    cout << "HALT5" << endl;
+                    return;
+                }
+                Ccons-=CEgest;
+
+                if ((Ccons/CNmic - Ncons)<(-0.01))
                 {
                     cout << "HALT4" << endl;
                     return;
@@ -272,24 +301,17 @@ void Communities :: operator ()( state_type &x , state_type &dxdt , double t)
             }
             else
             {
-                double CEgest=Ccons-(Ncons*CNmic);
+                CEgest=Ccons-(Ncons*CNmic);
                 if ((Ccons-(Ncons*CNmic))<0)
                 {
                     cout << "HALT5" << endl;
                     return;
                 }
                 Ccons-=CEgest;
-                dxdt[numR]+=CEgest;
             }
         }
+        dxdt[numR]+=CEgest;
         dxdt[i] += Ccons;
-
-    //Respiration
-
-        double d=m_Microbes[itM].getLoss();
-        double resp=d*m_Btemp[i];
-        dxdt[i]-=resp;
-        dxdt[NiNum]+=resp*m_Microbes[itM].getNC();
     }
 
 //Consumer
@@ -363,6 +385,7 @@ void Communities :: operator ()( state_type &x , state_type &dxdt , double t)
                 dxdt[m_nbtot+itD+5] -= conso*m_Detritus[itD].getNC();
             }
         }
+        
         for (int itM=0; itM<m_nbmic; ++itM)
         {
             int j = m_nbcons+m_nbprod+m_nbdet+1+itM;
@@ -378,7 +401,7 @@ void Communities :: operator ()( state_type &x , state_type &dxdt , double t)
                 TotNEgest += (1.0-e)*conso * m_Microbes[itM].getNC();
             }
         }
-
+        
     //Metabolism
        double resp = m_Btemp[i] * z;
        Ccons   -= resp;
@@ -438,10 +461,9 @@ void Communities :: operator ()( state_type &x , state_type &dxdt , double t)
 
     if (m_Btemp[NiNum]>0)
     {
-            dxdt[NiNum]-=m_Nout*m_Btemp[NiNum];
+            dxdt[NiNum]-=0.5*m_Btemp[NiNum];
     }
-        //Input ->
-            dxdt[NiNum]+=m_Nin;
+            dxdt[NiNum]+=0.4;
 
 }
 
@@ -458,12 +480,6 @@ void Communities :: operator()( state_type &x , const double t)//Ordre changee
             x[m_nbtot+itD]=0;
             x[m_nbtot+itD+5]=0;
         }
-/*
-        if (t>149.99)
-        {
-          cout << m_Detritus[itD].getName() << "\t" << 1/m_Detritus[itD].getNC() << endl;
-        }
-*/
     }
 
     for (int i=0; i<m_nbtot; i++)
@@ -489,7 +505,7 @@ void Communities :: operator()( state_type &x , const double t)//Ordre changee
         }
         out << endl;
     }
-    if (m_timer==(m_Tf/ m_Tp))
+    if (m_timer==100)
     {
         m_timer=0;
     }
@@ -519,7 +535,7 @@ void Communities :: integration(par::Params parParam, const char* result)//Ordre
         out << endl;
 
         //integrate_adaptive(make_controlled( 1.0e-6 , 1.0e-6 , runge_kutta_fehlberg78< state_type >()) , boost::ref(*this),B , 0.0 , 1.0 , 0.1 , boost::ref(*this));
-        integrate_const(runge_kutta_fehlberg78< state_type >() , boost::ref(*this), B , 0.0, m_Tf, m_Tp, boost::ref(*this));
+        integrate_const(runge_kutta_fehlberg78< state_type >() , boost::ref(*this), B , 0.0, 50.0, 0.0001, boost::ref(*this));
         out.close();
 }
 
@@ -633,6 +649,7 @@ int main(int argc, const char *argv[])
                                             ParamText.get_val<double>("CN")[i],
                                             ParamText.get_val<double>("r")[i],
                                             ParamText.get_val<double>("K")[i],
+                                            ParamText.get_val<double>("Nabs")[i],
                                             ParamText.get_val<double>("loss")[i]));
             //cout << "mic" <<  "\t" << imic+nbcons+nbprod+nbdet << "\t" << key << endl;
             ++imic;
@@ -697,16 +714,7 @@ int main(int argc, const char *argv[])
 
     int timer=0;
 
-    par::Params ArgText(argv[4]," ");
-    double Tp=ArgText.get_val<double>("Tf")[1];
-    double Tf=ArgText.get_val<double>("Tp")[1];
-    double Nin=ArgText.get_val<double>("Nin")[1];
-    double Nout=ArgText.get_val<double>("Nout")[1];
-    double DetIn=ArgText.get_val<double>("DetIn")[1];
-    double CNDetIn=ArgText.get_val<double>("CNDetIn")[1];
-
-
-    Communities Com1 (vecConsumer, vecDetritus, vecProducer, vecMicrobes, nbcons, nbdet, nbprod, nbmic, initial_biomass, Btemp, timer, Nin, Nout, DetIn, CNDetIn, Tf, Tp);
+    Communities Com1 (vecConsumer, vecDetritus, vecProducer, vecMicrobes, nbcons, nbdet, nbprod, nbmic, initial_biomass, Btemp, timer);
 
 //Run the dynamic
 

@@ -1,8 +1,8 @@
 //
 //  Microbes.cpp
-//  FW
+//  BB
 //
-//  
+//  Created by Eric on 24/07/2014.
 //  Copyright (c) 2014 Idaline Laigle. All rights reserved.
 //
 
@@ -16,7 +16,7 @@ Microbes::Microbes () : Group(), m_r(1)
 {	
 }
 
-Microbes::Microbes (int num, std::string name, double biomass, double bodymass, double CN, double r, double K, double loss) : Group(num, name, biomass, bodymass, CN, loss), m_r(r), m_K(K)
+Microbes::Microbes (int num, std::string name, double biomass, double bodymass, double CN, double r, double K, double Nabs, double loss) : Group(num, name, biomass, bodymass, CN, loss), m_r(r), m_K(K), m_Nabs(Nabs)
 {
 }
 
@@ -37,4 +37,8 @@ void Microbes :: getPref(state_type pref, int nbCP, int nbD)
         m_pref[i] = pref[i];
         if(m_pref[i]<0) cout << m_name << "\t" << i << endl;
     }
+}
+double Microbes :: getNabs()
+{
+    return m_Nabs;
 }
